@@ -1,5 +1,5 @@
 {
-  "name": "assign-3",
+  "name": "bootcamp-assign-3",
   "version": "5.0.0",
   "description": "",
   "main": "src/server.ts",
@@ -7,6 +7,7 @@
     "start": "node ./dist/server.js",
     "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
     "build": "tsc",
+    "rm": "rm -rf ./dist",
     "fix": "npx eslint src --fix",
     "lint": "npx eslint src --ignore-path .eslintignore --ext .js,.ts",
     "make:module": "node cli/cli.mjs make:module"
