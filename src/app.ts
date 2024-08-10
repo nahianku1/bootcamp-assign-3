@@ -12,7 +12,11 @@ app.use(cors({ origin: "*", credentials: true }));
 app.use(express.json());
 dotenv.config();
 
-app.use("/api", router)
+app.get("/", (req, res) => {
+  res.send(`Server working Again!`);
+});
+
+app.use("/api", router);
 
 app.use(notFound);
 app.use(globalErrorhandler);
