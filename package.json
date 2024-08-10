@@ -7,7 +7,7 @@
     "start": "node ./dist/server.js",
     "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
     "build": "tsc",
-    "rm": "rm -rf ./dist",
+    "rm": "rm -fr ./dist",
     "fix": "npx eslint src --fix",
     "lint": "npx eslint src --ignore-path .eslintignore --ext .js,.ts",
     "make:module": "node cli/cli.mjs make:module"

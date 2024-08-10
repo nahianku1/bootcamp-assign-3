@@ -8,10 +8,20 @@ on:
       - main
 jobs:
   Deploy-Production:
-    runs-on: ubuntu-latest
+    
+    strategy:
+      matrix:
+        node-version: [20]
+        os: [ubuntu-latest]
+
+    runs-on: ${{matrix.os}}
 
     steps:
       - uses: actions/checkout@v2
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
       - name: Install Dependency
         run: npm ci
       - name: Build Project
