@@ -12,7 +12,7 @@ app.use(cors({ origin: "*", credentials: true }));
 app.use(express.json());
 dotenv.config();
 
-app.use("/api", router);
+app.use("/api", router)
 
 app.use(notFound);
 app.use(globalErrorhandler);
