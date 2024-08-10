@@ -13,7 +13,7 @@ app.use(express.json());
 dotenv.config();
 
 app.get("/", (req, res) => {
-  res.send(`Server working Again!`);
+  res.send(`Server working Again after!`);
 });
 
 app.use("/api", router);
