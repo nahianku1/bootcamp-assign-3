@@ -5,6 +5,6 @@ export type TCars = {
   isElectric: boolean;
   features: string[];
   pricePerHour: number;
-  status: "available" | "not available";
+  status: "available" | "unavailable";
   isDeleted: boolean;
 };

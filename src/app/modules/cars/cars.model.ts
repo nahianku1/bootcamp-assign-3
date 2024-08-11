@@ -40,7 +40,7 @@ export const carsSchema = new Schema<TCars>(
     status: {
       type: String,
       enum: {
-        values: ["available", "not available"],
+        values: ["available", "unavailable"],
         message: `{VALUE} is not supported!`,
       },
       default: "available",
