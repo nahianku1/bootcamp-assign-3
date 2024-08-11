@@ -38,7 +38,7 @@ const getSingleCars: RequestHandler = async (req, res, next) => {
     sendResponse(res, {
       success: true,
       statusCode: 200,
-      message: "Single cars is retrieved successfully!",
+      message: "A Car retrieved successfully",
       data: result,
     });
   } catch (error: any) {

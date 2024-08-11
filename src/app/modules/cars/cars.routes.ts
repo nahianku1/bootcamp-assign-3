@@ -21,13 +21,13 @@ carsRouter.get(
 );
 
 carsRouter.get(
-  "/get-cars/:id",
+  "/:id",
   auth(USER_ROLE.admin, USER_ROLE.user),
   CarsControllers.getSingleCars
 );
 
-carsRouter.patch(
-  "/update-cars/:id",
+carsRouter.put(
+  "/:id",
   auth(USER_ROLE.admin),
   validateRequest(CarsValidations.updateCarsValidation),
   CarsControllers.updateCars
