@@ -53,7 +53,7 @@ const updateCars: RequestHandler = async (req, res, next) => {
     sendResponse(res, {
       success: true,
       statusCode: 200,
-      message: "Cars is updated successfully!",
+      message: "Car updated successfully",
       data: result,
     });
   } catch (error: any) {
@@ -69,7 +69,7 @@ const deleteSingleCars: RequestHandler = async (req, res, next) => {
     sendResponse(res, {
       success: true,
       statusCode: 200,
-      message: "Cars is deleted successfully!",
+      message: "Car Deleted successfully",
       data: result,
     });
   } catch (error: any) {

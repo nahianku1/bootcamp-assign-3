@@ -9,7 +9,7 @@ export const carsRouter = express.Router();
 
 carsRouter.post(
   "/",
-  auth("admin"),
+  auth(USER_ROLE.admin),
   validateRequest(CarsValidations.createCarsValidation),
   CarsControllers.createCars
 );
@@ -34,7 +34,7 @@ carsRouter.put(
 );
 
 carsRouter.delete(
-  "/delete-cars/:id",
+  "/:id",
   auth(USER_ROLE.admin),
   CarsControllers.deleteSingleCars
 );
