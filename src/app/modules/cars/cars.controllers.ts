@@ -7,22 +7,22 @@ const createCars: RequestHandler = async (req, res, next) => {
     const result = await CarsServices.createCarsIntoDB(req.body);
     sendResponse(res, {
       success: true,
-      statusCode: 200,
-      message: "Cars created successfully!",
-      data: result,
+      statusCode: 201,
+      message: "Car created successfully",
+      data: result[0],
     });
   } catch (error: any) {
     next(error);
   }
 };
 
-const getAllCarss: RequestHandler = async (req, res, next) => {
+const getAllCars: RequestHandler = async (req, res, next) => {
   try {
-    const result = await CarsServices.getAllCarssFromDB(req.query);
+    const result = await CarsServices.getAllCarsFromDB();
     sendResponse(res, {
       success: true,
       statusCode: 200,
-      message: "All carss are retrieved successfully!",
+      message: "Cars retrieved successfully",
       data: result,
     });
   } catch (error: any) {
@@ -79,7 +79,7 @@ const deleteSingleCars: RequestHandler = async (req, res, next) => {
 
 export const CarsControllers = {
   createCars,
-  getAllCarss,
+  getAllCars,
   getSingleCars,
   updateCars,
   deleteSingleCars,

@@ -1,6 +1,7 @@
 import { TUserRole } from "../../interfaces/app.types";
 
 export type TUser = {
+  _id: string;
   name: string;
   email: string;
   role?: TUserRole;

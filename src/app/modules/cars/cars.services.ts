@@ -7,17 +7,11 @@ const createCarsIntoDB = async (payload: TCars) => {
   return result;
 };
 
-const getAllCarssFromDB = async (query: Record<string, unknown>) => {
-  const queryInstance = new QueryBuilder(CarsModel, query)
-    .filter()
-    .sort()
-    .paginate()
-    .fields();
+const getAllCarsFromDB = async () => {
+  const result = await CarsModel.find({});
+  console.log(result);
 
-  const result = await queryInstance.model;
-  const meta = await queryInstance.countDocuments();
-
-  return { meta, result };
+  return  result ;
 };
 
 const getSingleCarsFromDB = async (id: string) => {
@@ -39,7 +33,7 @@ const deleteCarsFromDB = async (id: string) => {
 
 export const CarsServices = {
   createCarsIntoDB,
-  getAllCarssFromDB,
+  getAllCarsFromDB,
   getSingleCarsFromDB,
   updateCarsIntoDB,
   deleteCarsFromDB,

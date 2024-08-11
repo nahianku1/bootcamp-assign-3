@@ -1,8 +1,10 @@
 export type TCars = {
   name: string;
-  email: string;
-  role: string;
-  password: "password123";
-  phone: string;
-  address: string;
+  description: string;
+  color: string;
+  isElectric: boolean;
+  features: string[];
+  pricePerHour: number;
+  status: "available" | "not available";
+  isDeleted: boolean;
 };

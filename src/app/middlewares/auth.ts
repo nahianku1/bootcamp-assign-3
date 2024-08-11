@@ -5,15 +5,13 @@ import AppError from "../errors/AppError";
 import httpStatus from "http-status";
 import config from "../config/config";
 import { UserModel } from "../modules/user/user.model";
-import {
-  isJWTIssuedBeforePasswordChanged,
-  verifyToken,
-} from "../modules/auth/auth.utils";
+import { verifyToken } from "../modules/auth/auth.utils";
 import { TUserRole } from "../interfaces/app.types";
+import { TUser } from "../modules/user/user.interfaces";
 
 const auth = (...requiredRoles: TUserRole[]) => {
   return catchAsync(async (req: Request, res: Response, next: NextFunction) => {
-    const token = req.headers.authorization;
+    const token = req.headers.authorization?.split(" ")[1];
 
     // checking if the token is missing
     if (!token) {
@@ -26,10 +24,10 @@ const auth = (...requiredRoles: TUserRole[]) => {
       config.jwt_access_secret as string
     ) as JwtPayload;
 
-    const { role, email, iat } = verifiedToken;
+    const { role, email } = verifiedToken;
 
     // checking if the user is exist
-    const user = await UserModel.findById(email);
+    const user = (await UserModel.find({ email: email })) as unknown as TUser;
 
     if (!user) {
       throw new AppError(httpStatus.NOT_FOUND, "This user is not found!");
@@ -48,9 +46,6 @@ const auth = (...requiredRoles: TUserRole[]) => {
     if (userStatus === "blocked") {
       throw new AppError(httpStatus.FORBIDDEN, "This user is blocked!");
     }
-
-
-
     if (requiredRoles && !requiredRoles.includes(role)) {
       throw new AppError(httpStatus.UNAUTHORIZED, "You are not authorized!");
     }

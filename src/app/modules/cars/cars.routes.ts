@@ -8,16 +8,16 @@ import { CarsValidations } from "./cars.validation";
 export const carsRouter = express.Router();
 
 carsRouter.post(
-  "/create-cars",
-  auth(USER_ROLE.admin),
+  "/",
+  auth("admin"),
   validateRequest(CarsValidations.createCarsValidation),
   CarsControllers.createCars
 );
 
 carsRouter.get(
-  "/getall-carss",
+  "/",
   auth(USER_ROLE.admin, USER_ROLE.user),
-  CarsControllers.getAllCarss
+  CarsControllers.getAllCars
 );
 
 carsRouter.get(

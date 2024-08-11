@@ -3,6 +3,8 @@ import { AnyZodObject } from "zod";
 
 export const validateRequest = (schema: AnyZodObject) => {
   return async (req: Request, res: Response, next: NextFunction) => {
+    console.log(req.body);
+
     try {
       await schema.parseAsync(
         Object.keys(req.body).length ? req.body : req.cookies
