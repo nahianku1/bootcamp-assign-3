@@ -1,6 +1,7 @@
 import { UserServices } from "./user.services";
 import { sendResponse } from "../../utils/sendResponse";
 import catchAsync from "../../utils/catchAsync";
+import config from "../../config/config";
 
 const createUser = catchAsync(async (req, res) => {
   const result = await UserServices.createUserIntoDB(req.body);
@@ -13,43 +14,25 @@ const createUser = catchAsync(async (req, res) => {
   });
 });
 
-// const getMe = catchAsync(async (req, res) => {
-//   const { userId, role } = req.user;
-//   const result = await UserServices.getMeFromDB(userId, role);
+const loginUser = catchAsync(async (req, res) => {
+  const result = await UserServices.loginUser(req.body);
+  const { refreshToken, accessToken, data } = result;
 
-//   sendResponse(res, {
-//     success: true,
-//     statusCode: 200,
-//     message: "User was retrieved successfully!",
-//     data: result,
-//   });
-// });
+  res.cookie("refreshToken", refreshToken, {
+    secure: config.node_env === "production",
+    httpOnly: true,
+  });
 
-// const updateUser = catchAsync(async (req, res) => {
-//   const result = await UserServices.updateUserIntoDB(req.params.id, req.body);
-
-//   sendResponse(res, {
-//     success: true,
-//     statusCode: 200,
-//     message: "User status was updated successfully!",
-//     data: result,
-//   });
-// });
-
-// const deleteUser = catchAsync(async (req, res) => {
-//   const result = await UserServices.deleteUserIntoDB(req.params.id);
-
-//   sendResponse(res, {
-//     success: true,
-//     statusCode: 200,
-//     message: "User was deleted successfully!",
-//     data: result,
-//   });
-// });
+  sendResponse(res, {
+    success: true,
+    statusCode: 200,
+    message: "User logged in successfully",
+    data,
+    token: accessToken,
+  });
+});
 
 export const UserControllers = {
   createUser,
-  // getMe,
-  // updateUser,
-  // deleteUser,
+  loginUser,
 };

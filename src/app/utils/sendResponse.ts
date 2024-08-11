@@ -7,5 +7,6 @@ export function sendResponse<T>(res: Response, data: ResponseData<T>) {
     statusCode: data.statusCode,
     message: data.message,
     data: data.data,
+    token: data.token,
   });
 }

@@ -12,13 +12,9 @@ userRouter.post(
   UserControllers.createUser
 );
 
-// userRouter.put(
-//   "/update-user/:id",
-//   auth("admin"),
-//   [validateRequest(ZodValidations.updateUserValidation)],
-//   UserControllers.updateUser
-// );
 
-// userRouter.put("/delete-user/:id", auth("admin"), UserControllers.deleteUser);
-
-// userRouter.get("/me", auth("admin", "user"), UserControllers.getMe);
+userRouter.post(
+  "/signin",
+  validateRequest(ZodValidations.loginValidationSchema),
+  UserControllers.loginUser
+);

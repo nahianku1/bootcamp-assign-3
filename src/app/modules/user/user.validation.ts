@@ -1,5 +1,4 @@
 import { z } from "zod";
-import { TUser } from "./user.interfaces";
 
 export const createUserValidation = z.object({
   name: z.string({
@@ -35,6 +34,15 @@ export const createUserValidation = z.object({
   }),
 });
 
+const loginValidationSchema = z.object({
+  email: z.string({ required_error: "Email is required." }),
+  password: z.string({ required_error: "Password is required" }),
+});
+
 export const updateUserValidation = createUserValidation.partial();
 
-export const ZodValidations = { createUserValidation, updateUserValidation };
+export const ZodValidations = {
+  createUserValidation,
+  updateUserValidation,
+  loginValidationSchema,
+};
