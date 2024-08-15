@@ -11,6 +11,15 @@ export const createCarsValidation = z.object({
   pricePerHour: z.number(),
 });
 
+const returnCarValidation = z.object({
+  bookingId: z.string(),
+  endTime: z.string(),
+});
+
 export const updateCarsValidation = createCarsValidation.partial();
 
-export const CarsValidations = { createCarsValidation, updateCarsValidation };
+export const CarsValidations = {
+  createCarsValidation,
+  updateCarsValidation,
+  returnCarValidation,
+};

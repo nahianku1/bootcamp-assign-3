@@ -1,11 +1,10 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import config from "../../config/config";
 import httpStatus from "http-status";
-import AppError from "../../errors/AppError";
+import AppError from "../errors/AppError";
 
 export const createToken = (
-  jwtPayload: { email: string; role: string },
+  jwtPayload: { id: string; email: string; role: string },
   secret: string,
   expiresIn: string
 ) => {
@@ -29,13 +28,4 @@ export const isPasswordMatched = async (
   return await bcrypt.compare(plainPassword, hashPassword);
 };
 
-export const createHashedPassword = async (plainPassword: string) => {
-  return await bcrypt.hash(plainPassword, Number(config.bcrypt_salt));
-};
 
-export const isJWTIssuedBeforePasswordChanged = (
-  passwordChangedAt: Date,
-  tokenIssuedAt: number
-) => {
-  return new Date(passwordChangedAt).getTime() / 1000 > tokenIssuedAt;
-};

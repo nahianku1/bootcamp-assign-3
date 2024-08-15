@@ -5,9 +5,9 @@ import AppError from "../errors/AppError";
 import httpStatus from "http-status";
 import config from "../config/config";
 import { UserModel } from "../modules/user/user.model";
-import { verifyToken } from "../modules/auth/auth.utils";
 import { TUserRole } from "../interfaces/app.types";
 import { TUser } from "../modules/user/user.interfaces";
+import { verifyToken } from "../utils/auth.utils";
 
 const auth = (...requiredRoles: TUserRole[]) => {
   return catchAsync(async (req: Request, res: Response, next: NextFunction) => {

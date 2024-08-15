@@ -69,7 +69,6 @@ export const handleCastError = (
 };
 
 export const handleDuplicateError = (err: any): TErrorSourceReturnType => {
-  console.log(err, 72);
 
   const match = err.message.match(/"([^"]*)"/);
   const extractedMessage = match && match[1];

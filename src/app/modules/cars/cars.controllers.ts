@@ -1,6 +1,7 @@
 import { RequestHandler } from "express";
 import { CarsServices } from "./cars.services";
 import { sendResponse } from "../../utils/sendResponse";
+import { BookingsServices } from "../bookings/bookings.services";
 
 const createCars: RequestHandler = async (req, res, next) => {
   try {
@@ -77,10 +78,26 @@ const deleteSingleCars: RequestHandler = async (req, res, next) => {
   }
 };
 
+const returnCar: RequestHandler = async (req, res, next) => {
+
+  try {
+    const result = await CarsServices.returnAndUpdateCarIntoDB(req.body);
+    sendResponse(res, {
+      success: true,
+      statusCode: 200,
+      message: "Car returned successfully",
+      data: result,
+    });
+  } catch (error: unknown) {
+    next(error);
+  }
+};
+
 export const CarsControllers = {
   createCars,
   getAllCars,
   getSingleCars,
   updateCars,
   deleteSingleCars,
+  returnCar,
 };

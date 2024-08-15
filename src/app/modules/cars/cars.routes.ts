@@ -27,6 +27,13 @@ carsRouter.get(
 );
 
 carsRouter.put(
+  "/return",
+  auth(USER_ROLE.admin),
+  validateRequest(CarsValidations.returnCarValidation),
+  CarsControllers.returnCar
+);
+
+carsRouter.put(
   "/:id",
   auth(USER_ROLE.admin),
   validateRequest(CarsValidations.updateCarsValidation),

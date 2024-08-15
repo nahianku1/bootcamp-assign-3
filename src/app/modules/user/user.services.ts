@@ -1,19 +1,16 @@
 import httpStatus from "http-status";
 import AppError from "../../errors/AppError";
-import { TLoginUser } from "../auth/auth.interfaces";
 import { TUser } from "./user.interfaces";
 import { UserModel } from "./user.model";
-import { createToken, isPasswordMatched } from "../auth/auth.utils";
+import { createToken, isPasswordMatched } from "../../utils/auth.utils";
 import config from "../../config/config";
 
 const createUserIntoDB = async (payload: TUser) => {
-  console.log(payload);
-
   const result = UserModel.create([payload]);
   return result;
 };
 
-const loginUser = async (payload: TLoginUser) => {
+const loginUser = async (payload: { email: string; password: string }) => {
   // checking if the user is exist
   const user = await UserModel.findOne({
     email: payload.email,
@@ -46,6 +43,7 @@ const loginUser = async (payload: TLoginUser) => {
   //   //create token and sent to the  client
 
   const jwtPayload = {
+    id: user._id,
     email: user?.email as string,
     role: user?.role as string,
   };
