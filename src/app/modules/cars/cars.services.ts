@@ -4,7 +4,6 @@ import { totalHoursCalculate } from "../../utils/totalHOursCalculate";
 import { Types, startSession } from "mongoose";
 import { BookingsModel } from "../bookings/bookings.model";
 import AppError from "../../errors/AppError";
-import { TBookings } from "../bookings/bookings.interfaces";
 
 const createCarsIntoDB = async (payload: TCars) => {
   const result = CarsModel.create([payload]);
@@ -37,7 +36,7 @@ const deleteCarsFromDB = async (id: string) => {
   const result = await CarsModel.findByIdAndUpdate(
     id,
     { isDeleted: true },
-    { runValidators: true }
+    { runValidators: true, new: true }
   );
   return result;
 };
