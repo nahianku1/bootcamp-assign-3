@@ -22,7 +22,7 @@ export function globalErrorhandler(
   let statusCode: number = 500;
   let message: string = "Something went wrong!";
 
-  let errorSources: TErrorSource = [
+  let errorMessages: TErrorSource = [
     {
       path: "",
       message: `Something went wrong!`,
@@ -33,31 +33,31 @@ export function globalErrorhandler(
     const error = handleZodError(err);
     statusCode = error.statusCode;
     message = error.message;
-    errorSources = error.errorSources;
+    errorMessages = error.errorMessages;
   } else if (err?.name === "ValidationError") {
     const error = handleMongoValidationError(err);
     statusCode = error.statusCode;
     message = error.message;
-    errorSources = error.errorSources;
+    errorMessages = error.errorMessages;
   } else if (err?.name === "CastError") {
     const error = handleCastError(err);
     statusCode = error.statusCode;
     message = error.message;
-    errorSources = error.errorSources;
+    errorMessages = error.errorMessages;
   } else if (err?.name === "MongoServerError" && err?.code === 11000) {
     const error = handleDuplicateError(err);
     statusCode = error.statusCode;
     message = error.message;
-    errorSources = error.errorSources;
+    errorMessages = error.errorMessages;
   } else if (err?.stack.includes("E11000")) {
     const error = handleDuplicateError(err);
     statusCode = error.statusCode;
     message = error.message;
-    errorSources = error.errorSources;
+    errorMessages = error.errorMessages;
   } else if (err instanceof AppError) {
     statusCode = err?.statusCode;
     message = err.message;
-    errorSources = [
+    errorMessages = [
       {
         path: "",
         message: err?.message,
@@ -66,7 +66,7 @@ export function globalErrorhandler(
   } else if (err instanceof Error) {
     statusCode = httpStatus.BAD_REQUEST;
     message = err.message;
-    errorSources = [
+    errorMessages = [
       {
         path: "",
         message: err?.message,
@@ -77,8 +77,7 @@ export function globalErrorhandler(
   res.status(statusCode).json({
     success: false,
     message: message,
-    err,
-    errorSources,
+    errorMessages,
     stack: config.node_env === "development" ? err?.stack : null,
   });
 }

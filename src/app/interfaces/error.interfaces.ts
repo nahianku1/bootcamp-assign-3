@@ -6,5 +6,5 @@ export type TErrorSource = {
 export type TErrorSourceReturnType = {
   statusCode: number;
   message: string;
-  errorSources: TErrorSource;
+  errorMessages: TErrorSource;
 };

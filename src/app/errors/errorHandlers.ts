@@ -8,7 +8,7 @@ import {
 export const handleZodError = (err: ZodError): TErrorSourceReturnType => {
   const statusCode = 400;
   const message = `Zod validation Error!`;
-  const errorSources = err.issues.map((issue: ZodIssue) => {
+  const errorMessages = err.issues.map((issue: ZodIssue) => {
     return {
       path: issue.path.at(-1)!,
       message: issue.message,
@@ -17,7 +17,7 @@ export const handleZodError = (err: ZodError): TErrorSourceReturnType => {
   return {
     statusCode,
     message,
-    errorSources,
+    errorMessages,
   };
 };
 
@@ -27,7 +27,7 @@ export const handleMongoValidationError = (
   const statusCode = 400;
   const message = `Mongoose validation Error!`;
 
-  const errorSources = Object.values(err.errors).map(
+  const errorMessages = Object.values(err.errors).map(
     (value: mongoose.Error.ValidatorError | mongoose.Error.CastError) => {
       return {
         path: value.path!,
@@ -39,7 +39,7 @@ export const handleMongoValidationError = (
   return {
     statusCode,
     message,
-    errorSources,
+    errorMessages,
   };
 };
 
@@ -54,7 +54,7 @@ export const handleCastError = (
   const message = `Mongoose Cast Error!`;
   // Cast to ObjectId failed for value \"fghfghfgh\"
 
-  const errorSources = [
+  const errorMessages = [
     {
       path: err?.path,
       message: modifiedCastError(err?.message),
@@ -64,7 +64,7 @@ export const handleCastError = (
   return {
     statusCode,
     message,
-    errorSources,
+    errorMessages,
   };
 };
 
@@ -72,7 +72,7 @@ export const handleDuplicateError = (err: any): TErrorSourceReturnType => {
 
   const match = err.message.match(/"([^"]*)"/);
   const extractedMessage = match && match[1];
-  const errorSources: TErrorSource = [
+  const errorMessages: TErrorSource = [
     {
       path: "",
       message: `${extractedMessage} is already exists`,
@@ -84,6 +84,6 @@ export const handleDuplicateError = (err: any): TErrorSourceReturnType => {
   return {
     statusCode,
     message: `Mongoose unique value error!`,
-    errorSources,
+    errorMessages,
   };
 };

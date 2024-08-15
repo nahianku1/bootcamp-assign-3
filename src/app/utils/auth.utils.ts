@@ -1,3 +1,4 @@
+import { Response } from "express";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import httpStatus from "http-status";
@@ -13,11 +14,15 @@ export const createToken = (
   });
 };
 
-export const verifyToken = (token: string, secret: string) => {
+export const verifyToken = (res: Response, token: string, secret: string) => {
   try {
     return jwt.verify(token, secret);
   } catch (error) {
-    throw new AppError(httpStatus.UNAUTHORIZED, `You are unauthorized!`);
+    res.status(401).json({
+      success: false,
+      statusCode: 401,
+      message: "You have no access to this route",
+    });
   }
 };
 
@@ -27,5 +32,3 @@ export const isPasswordMatched = async (
 ) => {
   return await bcrypt.compare(plainPassword, hashPassword);
 };
-
-

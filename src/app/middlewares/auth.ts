@@ -15,12 +15,17 @@ const auth = (...requiredRoles: TUserRole[]) => {
 
     // checking if the token is missing
     if (!token) {
-      throw new AppError(httpStatus.UNAUTHORIZED, "You are not authorized!");
+      res.status(401).json({
+        success: false,
+        statusCode: 401,
+        message: "You have no access to this route",
+      });
     }
 
     // checking if the given token is valid
     const verifiedToken = verifyToken(
-      token,
+      res,
+      token as string,
       config.jwt_access_secret as string
     ) as JwtPayload;
 
@@ -47,7 +52,11 @@ const auth = (...requiredRoles: TUserRole[]) => {
       throw new AppError(httpStatus.FORBIDDEN, "This user is blocked!");
     }
     if (requiredRoles && !requiredRoles.includes(role)) {
-      throw new AppError(httpStatus.UNAUTHORIZED, "You are not authorized!");
+      res.status(401).json({
+        success: false,
+        statusCode: 401,
+        message: "You have no access to this route",
+      });
     }
 
     req.user = verifiedToken;
