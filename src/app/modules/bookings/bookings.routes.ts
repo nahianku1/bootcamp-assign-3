@@ -13,7 +13,6 @@ bookingsRouter.get(
   BookingsControllers.getAllBookings
 );
 
-
 bookingsRouter.post(
   "/",
   auth(USER_ROLE.user),
@@ -23,8 +22,6 @@ bookingsRouter.post(
 
 bookingsRouter.get(
   "/my-bookings",
-  auth( USER_ROLE.user),
+  auth(USER_ROLE.user),
   BookingsControllers.getMyBookings
 );
-
-
