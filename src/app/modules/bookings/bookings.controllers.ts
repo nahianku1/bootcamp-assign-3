@@ -20,6 +20,7 @@ const getAllBookings: RequestHandler = async (req, res, next) => {
 };
 
 const createBookings: RequestHandler = async (req, res, next) => {
+
   const { id } = req.user;
   try {
     const result = await BookingsServices.createBookingsIntoDB(id, req.body);

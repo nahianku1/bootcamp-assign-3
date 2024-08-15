@@ -1,7 +1,7 @@
 import { CarsModel } from "./cars.model";
 import { TCars } from "./cars.interfaces";
 import { totalHoursCalculate } from "../../utils/totalHOursCalculate";
-import { startSession } from "mongoose";
+import { Types, startSession } from "mongoose";
 import { BookingsModel } from "../bookings/bookings.model";
 import AppError from "../../errors/AppError";
 import { TBookings } from "../bookings/bookings.interfaces";
@@ -12,14 +12,16 @@ const createCarsIntoDB = async (payload: TCars) => {
 };
 
 const getAllCarsFromDB = async () => {
-  const result = await CarsModel.find({});
+  const result = await CarsModel.find({ isDeleted: false });
 
   return result;
 };
 
 const getSingleCarsFromDB = async (id: string) => {
-
-  const result = await CarsModel.findById(id);
+  const result = await CarsModel.findOne({
+    _id: new Types.ObjectId(id),
+    isDeleted: false,
+  });
   return result;
 };
 
@@ -32,7 +34,11 @@ const updateCarsIntoDB = async (id: string, payload: Partial<TCars>) => {
 };
 
 const deleteCarsFromDB = async (id: string) => {
-  const result = await CarsModel.findByIdAndDelete(id);
+  const result = await CarsModel.findByIdAndUpdate(
+    id,
+    { isDeleted: true },
+    { runValidators: true }
+  );
   return result;
 };
 
@@ -62,7 +68,6 @@ const returnAndUpdateCarIntoDB = async (payload: Record<string, string>) => {
 
     const car: TCars = bookings?.car as TCars;
     const pricePerHour = car?.pricePerHour;
-
 
     await BookingsModel.findByIdAndUpdate(
       bookingId,

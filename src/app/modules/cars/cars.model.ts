@@ -55,7 +55,7 @@ export const carsSchema = new Schema<TCars>(
     versionKey: false,
     toJSON: {
       transform: (doc, ret) => {
-        const { _id, status, password, isDeleted, ...rest } = ret;
+        const { _id,  ...rest } = ret;
         return { _id, ...rest };
       },
     },

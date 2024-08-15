@@ -18,6 +18,7 @@ const getAllBookingsFromDB = async (id: string, date: string) => {
 
 const createBookingsIntoDB = async (id: string, payload: TBookings) => {
   const { carId, ...rest } = payload;
+
   const finalPayload = { ...rest, user: id, car: carId };
 
   const session = await startSession();
@@ -43,6 +44,7 @@ const createBookingsIntoDB = async (id: string, payload: TBookings) => {
       .toString()
       .split("'")[0]
       .replace("'", "");
+      
     const result = await BookingsModel.findById(bookingId).populate("user car");
     return result;
   } catch (error) {

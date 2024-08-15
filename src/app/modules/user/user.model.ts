@@ -49,7 +49,7 @@ export const userSchema = new Schema<TUser>(
     versionKey: false,
     toJSON: {
       transform: (doc, ret) => {
-        const { _id, status, password, isDeleted, ...rest } = ret;
+        const { _id,  ...rest } = ret;
         return { _id, ...rest };
       },
     },

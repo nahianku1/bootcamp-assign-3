@@ -26,10 +26,12 @@ export const bookingsSchema = new Schema<TBookings>(
     },
     user: {
       type: Schema.Types.ObjectId,
+      required: true,
       ref: "User",
     },
     car: {
       type: Schema.Types.ObjectId,
+      required: true,
       ref: "Cars",
     },
     totalCost: { type: Number, default: 0 },
@@ -39,7 +41,7 @@ export const bookingsSchema = new Schema<TBookings>(
     versionKey: false,
     toJSON: {
       transform: (doc, ret) => {
-        const { _id, status, password, isDeleted, ...rest } = ret;
+        const { _id,  ...rest } = ret;
         return { _id, ...rest };
       },
     },

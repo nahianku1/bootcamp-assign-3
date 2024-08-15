@@ -82,6 +82,8 @@ const returnCar: RequestHandler = async (req, res, next) => {
 
   try {
     const result = await CarsServices.returnAndUpdateCarIntoDB(req.body);
+    console.log(result);
+
     sendResponse(res, {
       success: true,
       statusCode: 200,
