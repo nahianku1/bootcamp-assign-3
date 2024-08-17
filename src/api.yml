@@ -1,0 +1,118 @@
+openapi: 3.0.0
+
+info:
+  title: "Car Booking Service API Documentation"
+  description: "This is a simple Car Booking Management api. Admin can create car, update car and delete car. User can also get car booked by their Id. Admin can get all cars booked by users. When car returned by user admin can update car accordingly."
+
+  version: "1.0.0"
+
+tags:
+  - name: User
+    description: User Module Name
+
+servers:
+  - url: http://localhost:9000/api
+    description: Local server
+  - url: https://bootcamp-assign-3.vercel.app/api
+    description: Production server
+
+paths:
+  /auth/signup:
+    post:
+      summary: Sign up
+      tags:
+        - User
+      description: User signup endpoint
+      requestBody:
+        description: Use Info
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - name
+                - email
+                - password
+                - role
+                - phone
+                - address
+              properties:
+                name:
+                  type: string
+                  example: Himel
+                email:
+                  type: string
+                  example: "himelku1@gmail.com"
+                role:
+                  type: string
+                  default: user
+                  enum:
+                    - admin
+                    - user
+                  example: "admin"
+                password:
+                  type: string
+                  example: "Admin123"
+                phone:
+                  type: string
+                  pattern: ^[0-9]{11}$
+                  example: "01779137132"
+                address:
+                  type: string
+                  example: "Khulna, Daulatpur"
+      responses:
+        201:
+          description: Description
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  statusCode:
+                    type: integer
+                    example: 201
+                  message:
+                    type: string
+                    example: "User registered successfully"
+                  data:
+                    type: object
+                    properties:
+                      _id:
+                        type: string
+                        example: "66c0f0d4e93a23e53b344ad6"
+                      name:
+                        type: string
+                        example: "John Doe"
+                      email:
+                        type: string
+                        example: "munniku4@gmail.com"
+                      role:
+                        type: string
+                        example: "user"
+                      password:
+                        type: string
+                        example: "$2b$10$t.HGl84Izn.MVNtvYlU.L.y3z3rOY0AxeN62Lc/48qSprCUgwjGLS"
+                      phone:
+                        type: string
+                        example: "01779137139"
+                      address:
+                        type: string
+                        example: "123 Main St, City, Country"
+                      status:
+                        type: string
+                        example: "active"
+                      isDeleted:
+                        type: boolean
+                        example: false
+                      createdAt:
+                        type: string
+                        format: date-time
+                        example: "2024-08-17T18:49:56.885Z"
+                      updatedAt:
+                        type: string
+                        format: date-time
+                        example: "2024-08-17T18:49:56.885Z"

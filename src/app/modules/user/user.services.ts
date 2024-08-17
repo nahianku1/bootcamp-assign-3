@@ -5,6 +5,8 @@ import { UserModel } from "./user.model";
 import { createToken, isPasswordMatched } from "../../utils/auth.utils";
 import config from "../../config/config";
 
+
+
 const createUserIntoDB = async (payload: TUser) => {
   const result = UserModel.create([payload]);
   return result;

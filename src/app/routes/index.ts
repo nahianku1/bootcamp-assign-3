@@ -6,6 +6,7 @@ import { carsRouter } from "../modules/cars/cars.routes";
 
 export const router = Router();
 
+
 const moduleRoutes = [
   {
     path: "/auth",

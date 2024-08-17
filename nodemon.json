@@ -1,0 +1,5 @@
+{
+  "watch": ["src"],
+  "ext": "js,ts,json,yml,yaml",
+  "exec": "ts-node-dev --respawn --transpile-only src/server.ts"
+}
