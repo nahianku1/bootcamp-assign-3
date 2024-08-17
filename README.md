@@ -21,7 +21,7 @@ This is a simple **Car Booking Management** api. Admin can create car, update ca
 - MongoDB as primary database.
 - Mongoose as ODM.
 - ZOD Validation.
-- GIT Hub Action for Deployment.
+- GIT Hub Action for CI/CD.
 
 ### How to run locally:
 
