@@ -50,7 +50,6 @@ paths:
                   enum:
                     - admin
                     - user
-                  example: "admin"
                 password:
                   type: string
                   example: "Admin123"

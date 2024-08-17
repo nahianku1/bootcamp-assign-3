@@ -5,7 +5,7 @@
   "main": "src/server.ts",
   "scripts": {
     "start": "node ./dist/server.js",
-    "dev": "ts-node-dev --extensions ts,yaml,yml --watch /src/api.yml --respawn --transpile-only src/server.ts",
+    "dev": "ts-node-dev  --watch /src/api.yml --respawn --transpile-only src/server.ts",
     "build": "tsc",
     "rm": "rm -fr ./dist",
     "fix": "npx eslint src --fix",
