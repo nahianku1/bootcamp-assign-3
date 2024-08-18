@@ -18,11 +18,8 @@ app.use(express.json());
 dotenv.config();
 
 app.use(express.static(path.join(__dirname, "swagger-ui-dist")));
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+app.use("/", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
-app.get("/", (req, res) => {
-  res.send(`Server working Again after!`);
-});
 
 app.use("/api", router);
 
