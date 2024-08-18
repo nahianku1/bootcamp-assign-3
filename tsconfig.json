@@ -1,5 +1,9 @@
 {
-  "include": ["src", "cli/utils/addImport.mjs"], // which files to compile
+  "include": [
+    "src",
+    "node_modules/swagger-ui-dist/",
+    "cli/utils/addImport.mjs"
+  ], // which files to compile
   "exclude": ["node_modules"], // which files to skip
   "compilerOptions": {
     /* Visit https://aka.ms/tsconfig to read more about this file */
