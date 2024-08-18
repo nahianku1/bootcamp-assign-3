@@ -8,7 +8,7 @@
     "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
     "build": "tsc",
     "rm": "rm -fr ./dist",
-    "cp": "cp ./src/api.yml ./dist",
+    "cp": "cp ./src/api.yml ./dist && cp -r ./node_modules/swagger-ui-dist ./dist",
     "fix": "npx eslint src --fix",
     "lint": "npx eslint src --ignore-path .eslintignore --ext .js,.ts",
     "make:module": "node cli/cli.mjs make:module"
