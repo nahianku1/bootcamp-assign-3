@@ -64,4 +64,3 @@ npm run dev
 
 ###### Deployment: [Live Link](https://bootcamp-assign-3.vercel.app/)
 
-###### Documentation: [OpenAPI Documentation](https://bootcamp-assign-3.vercel.app/api-docs)
