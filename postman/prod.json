@@ -1,0 +1,15 @@
+{
+	"id": "1243d11a-769c-4fe8-8676-3108c707c359",
+	"name": "PROD",
+	"values": [
+		{
+			"key": "PROD",
+			"value": "https://bootcamp-assign-3.vercel.app",
+			"type": "default",
+			"enabled": true
+		}
+	],
+	"_postman_variable_scope": "environment",
+	"_postman_exported_at": "2024-09-10T19:22:34.746Z",
+	"_postman_exported_using": "Postman/11.12.0-240903-1253"
+}
